@@ -3,7 +3,6 @@
     <div class="container">
       <h1 class="display-5 fw-light text-white mb-3">🔐 App con Angular y MongoDB</h1>
       <p class="lead text-white-50 mb-3">{{ welcomeMessage() }}</p>
-
       @if (isAuthenticated()) {
         <button class="btn btn-danger btn-lg rounded-pill" (click)="logout()">
           🚪 Cerrar Sesión
@@ -11,20 +10,19 @@
       }
     </div>
   </header>
-
   <main class="flex-grow-1 d-flex align-items-center justify-content-center py-5">
     <div class="container">
       @if (!isAuthenticated()) {
         @if (view() === 'login') {
           <app-login (loginSuccess)="onLoginSuccess($event)"></app-login>
           <p class="text-center mt-3 text-white-50">
-            ¿No tienes una cuenta? 
+            ¿No tienes una cuenta?
             <a href="#" (click)="$event.preventDefault(); view.set('register')" class="fw-bold text-white">Regístrate aquí</a>
           </p>
         } @else {
           <app-register></app-register>
           <p class="text-center mt-3 text-white-50">
-            ¿Ya tienes una cuenta? 
+            ¿Ya tienes una cuenta?
             <a href="#" (click)="$event.preventDefault(); view.set('login')" class="fw-bold text-white">Inicia sesión</a>
           </p>
         }
@@ -33,7 +31,6 @@
       }
     </div>
   </main>
-
   <footer class="bg-dark bg-opacity-25 text-center py-3">
     <p class="text-white-50 mb-0">Desarrollado con ❤️ usando Angular, Signals, Node.js y MongoDB</p>
   </footer>
