@@ -1,0 +1,16 @@
+/* Gradiente y sombra para el botón primario */
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(118, 75, 162, 0.4);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  transform: translateY(-2px);
+}

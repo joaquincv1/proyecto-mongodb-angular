@@ -1,0 +1,76 @@
+<div class="container-fluid">
+  <div class="card shadow-lg border-0 rounded-4 admin-panel">
+    <div class="card-header bg-transparent border-bottom pb-3">
+      <h2 class="card-title h3 text-dark mb-3">Panel de Administración - {{ username() }}</h2>
+    </div>
+
+    <div class="card-body p-4">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="nav flex-column nav-pills" role="tablist">
+            <button
+              class="nav-link text-start mb-2"
+              [class.active]="activeSection() === 'dashboard'"
+              (click)="changeSection('dashboard')">
+              📊 Dashboard
+            </button>
+            <button
+              class="nav-link text-start mb-2"
+              [class.active]="activeSection() === 'users'"
+              (click)="changeSection('users')">
+              👥 Usuarios ({{ userList().length }})
+            </button>
+          </div>
+        </div>
+
+        <div class="col-md-9">
+          <div class="mb-4">
+            <h3 class="h4 text-dark">{{ sectionTitle() }}</h3>
+          </div>
+
+          <div class="section-content">
+            @switch (activeSection()) {
+              @case ('dashboard') {
+                <p>Bienvenido al panel de administración. Selecciona una opción del menú para continuar.</p>
+              }
+              
+              @case ('users') {
+                <div class="mb-3">
+                  <app-boton-personalizado
+                    texto="🔄 Actualizar Lista"
+                    (click)="loadUsers()"
+                    variante="secondary"
+                    [deshabilitado]="isLoadingUsers()">
+                  </app-boton-personalizado>
+                </div>
+
+                <div class="table-responsive">
+                  @if (isLoadingUsers()) {
+                    <p>Cargando usuarios...</p>
+                  } @else {
+                    <table class="table table-hover">
+                      <thead class="table-dark">
+                        <tr>
+                          <th>Nombre de Usuario</th>
+                          <th>Correo Electrónico</th>
+                          <th>Contraseña</th> </tr>
+                      </thead>
+                      <tbody>
+                        @for (user of userList(); track user._id) {
+                          <tr>
+                            <td>👤 {{ user.nombreCompleto }}</td>
+                            <td>{{ user.email }}</td>
+                            <td><strong>********</strong> (Protegida)</td> </tr>
+                        }
+                      </tbody>
+                    </table>
+                  }
+                </div>
+              }
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-4">
+    <div class="card shadow-lg border-0 rounded-4 login-card">
+      <div class="card-body p-4">
+        <div class="text-center mb-4">
+          <h2 class="card-title h3 text-dark">🔐 Iniciar Sesión</h2>
+          <p class="text-muted">Ingresa tus credenciales para acceder</p>
+        </div>
+
+        <form (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="email" class="form-label fw-semibold">📧 Email</label>
+            <input 
+              type="email" 
+              id="email"
+              [ngModel]="email()"
+              (ngModelChange)="email.set($event)"
+              name="email"
+              placeholder="ejemplo@correo.com"
+              [disabled]="isLoading()"
+              class="form-control form-control-lg rounded-3"
+              required>
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label fw-semibold">🔒 Contraseña</label>
+            <input 
+              type="password" 
+              id="password"
+              [ngModel]="password()"
+              (ngModelChange)="password.set($event)"
+              name="password"
+              placeholder="Ingresa tu contraseña"
+              [disabled]="isLoading()"
+              class="form-control form-control-lg rounded-3"
+              required>
+          </div>
+
+          @if (errorMessage()) {
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+              <div>{{ errorMessage() }}</div>
+            </div>
+          }
+
+          <div class="d-grid mb-3">
+            <app-boton-personalizado
+              [texto]="buttonText()"
+              [deshabilitado]="!isFormValid() || isLoading()"
+              [cargando]="isLoading()"
+              tipo="submit"
+            ></app-boton-personalizado>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
